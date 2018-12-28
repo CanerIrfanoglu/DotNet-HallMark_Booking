@@ -1,0 +1,45 @@
+﻿@model IEnumerable<roomBooking.room>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.roomName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.roomSize)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.roomLocation)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.roomName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.roomSize)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.roomLocation)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.roomID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.roomID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.roomID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,68 @@
+﻿@model IEnumerable<roomBooking.booking>
+
+@{
+    ViewBag.Title = "Index";
+    if (!System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+    {
+        Response.Redirect("~/Account/Login?returnUrl="
+            + Request.Url.LocalPath, false);
+    }
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+    </p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.room.roomName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.eventName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.startDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.endDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.room.roomName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.eventName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.startDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.endDate)
+        </td>
+        <td>
+            @if (User.IsInRole("Admin") || User.Identity.Name == item.AspNetUser.Email)
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = item.eventID })}
+
+            @if (User.IsInRole("Admin") || User.Identity.Name == item.AspNetUser.Email)
+            {
+                @Html.ActionLink("Details", "Details", new { id = item.eventID })}
+            @if (User.IsInRole("Admin") || User.Identity.Name == item.AspNetUser.Email)
+            {@Html.ActionLink("Delete", "Delete", new { id = item.eventID })}
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from Service_CallService WSDL service -->
+
+  <service name="Service_Call" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://servicecall.mcds5510.com"/>
+      <parameter name="wsdlServiceElement" value="Service_CallService"/>
+      <parameter name="schemaQualified" value="http://servicecall.mcds5510.com"/>
+      <parameter name="wsdlServicePort" value="Service_Call"/>
+      <parameter name="className" value="com.mcds5510.servicecall.Service_Call"/>
+      <parameter name="wsdlPortType" value="Service_Call"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://servicecall.mcds5510.com" xmlns:retNS="http://servicecall.mcds5510.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="sendMail" qname="operNS:sendMail" returnQName="retNS:sendMailReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://servicecall.mcds5510.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:eMailid" type="tns:string"/>
+        <parameter xmlns:pns="http://servicecall.mcds5510.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:message" type="tns:string"/>
+      </operation>
+      <parameter name="allowedMethods" value="sendMail"/>
+
+  </service>
+</deployment>

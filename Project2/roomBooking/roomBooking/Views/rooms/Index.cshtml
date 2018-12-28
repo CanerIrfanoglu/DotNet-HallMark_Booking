@@ -1,0 +1,61 @@
+﻿@model IEnumerable<roomBooking.room>
+
+@{
+    ViewBag.Title = "Index";
+    if (!System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+    {
+        Response.Redirect("~/Account/Login?returnUrl="
+            + Request.Url.LocalPath, false);
+    }
+}
+
+<h2>Index</h2>
+
+<p>
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Create New", "Create")
+    }
+    </p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.roomName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.roomSize)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.roomLocation)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.roomName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.roomSize)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.roomLocation)
+        </td>
+        <td>
+
+            @if (User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = item.roomID })}
+            
+            @if(User.IsInRole("Admin"))
+            {
+                    @Html.ActionLink("Details", "Details", new { id = item.roomID })}
+            @if (User.IsInRole("Admin"))
+            {@Html.ActionLink("Delete", "Delete", new { id = item.roomID })}
+
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,58 @@
+﻿@model roomBooking.booking
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>booking</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.room.roomName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.room.roomName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user.aNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user.aNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.eventName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.eventName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.startDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.startDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.endDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.endDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.eventID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

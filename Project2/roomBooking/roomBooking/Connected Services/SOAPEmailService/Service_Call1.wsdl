@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:intf="http://servicecall.mcds5510.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:impl="http://servicecall.mcds5510.com" targetNamespace="http://servicecall.mcds5510.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://servicecall.mcds5510.com">
+      <xsd:element name="sendMail">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="eMailid" type="xsd:string" />
+            <xsd:element name="message" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sendMailResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="sendMailReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="checkLogin">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="userName" type="xsd:string" />
+            <xsd:element name="password" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="checkLoginResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="checkLoginReturn" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="checkLoginRequest">
+    <wsdl:part name="parameters" element="impl:checkLogin" />
+  </wsdl:message>
+  <wsdl:message name="sendMailRequest">
+    <wsdl:part name="parameters" element="impl:sendMail" />
+  </wsdl:message>
+  <wsdl:message name="sendMailResponse">
+    <wsdl:part name="parameters" element="impl:sendMailResponse" />
+  </wsdl:message>
+  <wsdl:message name="checkLoginResponse">
+    <wsdl:part name="parameters" element="impl:checkLoginResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Service_Call">
+    <wsdl:operation name="sendMail">
+      <wsdl:input name="sendMailRequest" message="impl:sendMailRequest" />
+      <wsdl:output name="sendMailResponse" message="impl:sendMailResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="checkLogin">
+      <wsdl:input name="checkLoginRequest" message="impl:checkLoginRequest" />
+      <wsdl:output name="checkLoginResponse" message="impl:checkLoginResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Service_CallSoapBinding" type="impl:Service_Call">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="sendMail">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="sendMailRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="sendMailResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkLogin">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="checkLoginRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="checkLoginResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service_CallService">
+    <wsdl:port name="Service_Call" binding="impl:Service_CallSoapBinding">
+      <wsdlsoap:address location="http://localhost:8080/HallBooking/services/Service_Call" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
